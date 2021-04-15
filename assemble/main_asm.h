@@ -4,7 +4,5 @@
 #include "../typedefs.h"
 #include "loadfile.h"
 
-string ** assemble(string * file_path){
+string ** assemble(string * file_path);
 
-
-}
