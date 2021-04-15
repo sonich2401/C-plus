@@ -31,7 +31,7 @@ typedef float float32;
 #define TRUE true
 #define FALSE false
 
-typedef char string;
+typedef char * string;
 
 
 #endif

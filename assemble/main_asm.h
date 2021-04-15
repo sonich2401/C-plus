@@ -5,5 +5,5 @@
 #include "../typedefs.h"
 #include "loadfile.h"
 
-rFile * assemble(string * file_path);
+void assemble(string file_path);
 

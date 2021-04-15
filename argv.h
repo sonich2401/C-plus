@@ -4,7 +4,7 @@
 #include "cppstdlib/stoi/stoi.h"
 #include "cppstdlib/rfind/rfind.h"
 
-const char * useage_errors[] = {
+const string useage_errors[] = {
     "No arguments!",
     "No valid GCC command!",
     "Not enough arguments!",
@@ -14,15 +14,15 @@ const char * useage_errors[] = {
 };
 
 typedef struct {
-    string * gcc_command;
+    string gcc_command;
     bool auto_make;
     bool delete_c;
     bool use_make;
     int supress; // 0 = none, 1 = gcc, 2 = c+
     int verb; // 0 = disabled
     uint16 file_count;
-    string ** files;
-    string * error;
+    string * files;
+    string error;
 }options;
 
 void init_options(options * o){
@@ -37,7 +37,7 @@ void init_options(options * o){
 
 
 options argv_decode(int argc, void * argv[]){
-    char ** argv_s = (char**)argv;
+    string * argv_s = (string *)argv;
 
     options ret;
     init_options(&ret);
@@ -146,7 +146,7 @@ options argv_decode(int argc, void * argv[]){
 
     ret.file_count = argc - cur_arg;
     if(ret.file_count > 0){
-        ret.files = malloc(ret.file_count * sizeof(string * ));
+        ret.files = malloc(ret.file_count * sizeof(string));
         for(uint16 i = 0; i < ret.file_count; i++){
             ret.files[i] = malloc(strlen(argv_s[cur_arg + i])+1);
             strcpy(ret.files[i],argv_s[cur_arg + i]);

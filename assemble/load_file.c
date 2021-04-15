@@ -7,17 +7,17 @@
 
 
 
-rFile loadTextFile(char * file_path){
+rFile loadTextFile(string file_path){
 
     rFile rret;
     rret.fn = malloc(strlen(file_path)+1);
     strcpy(rret.fn, file_path);
 
 
-    string ** ret;
+    string * ret;
     unsigned long max_line = LOAD_FILE_MAX_LINES;
     unsigned long cur_line = 0;
-    ret = malloc(sizeof(string *) * max_line );
+    ret = malloc(sizeof(string) * max_line );
 
    FILE *file = fopen (  file_path, "r" );
    if ( file != NULL )
@@ -30,7 +30,7 @@ rFile loadTextFile(char * file_path){
 
         if(cur_line+1 >= max_line){
           max_line += 50;
-          ret = realloc(ret, max_line * sizeof(string * )); 
+          ret = realloc(ret, max_line * sizeof(string)); 
         }
         ret[cur_line] = malloc(strlen(line)+1);
         strcpy(ret[cur_line++],line);
@@ -60,11 +60,11 @@ void eraseFileLine(rFile * file, uint32 line){
 void checkFileBufferHeath(rFile * file){
   if(file->buff_size <= file->linec + 1){ //Check if we need to resize the string table
     file->buff_size += 50;
-    file->dat = realloc(file->dat, file->buff_size * sizeof(string * ));
+    file->dat = realloc(file->dat, file->buff_size * sizeof(string));
   }
 }
 
-void setFileLine(rFile * file, uint32 line, string * new_line){
+void setFileLine(rFile * file, uint32 line, string new_line){
 
   if(file->dat[file->linec] != NULL){ //Make sure we dont have memory leaks
     free(file->dat[file->linec]);
@@ -74,7 +74,7 @@ void setFileLine(rFile * file, uint32 line, string * new_line){
   strcpy(file->dat[line],new_line); //Copy the new string into the slot
 }
 
-void insertFileLine(rFile * file, uint32 line, string * new_line){
+void insertFileLine(rFile * file, uint32 line, string new_line){
 
   checkFileBufferHeath(file); //Make sure we have enough memory
 
@@ -87,7 +87,7 @@ void insertFileLine(rFile * file, uint32 line, string * new_line){
   file->linec++;
 }
 
-void appendFileLine(rFile * file, uint32 line, string * new_line){
+void appendFileLine(rFile * file, uint32 line, string new_line){
   checkFileBufferHeath(file); //Make sure we have enough memory
   setFileLine(file, file->linec, new_line);
 }

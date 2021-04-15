@@ -1,5 +1,5 @@
 #include "rfind.h"
-uint32 rfind(string * src, string * find, uint32 offset)
+uint32 rfind(string src, string find, uint32 offset)
 {
     uint32 src_len = strlen(src);
     uint32 find_len = strlen(find);
