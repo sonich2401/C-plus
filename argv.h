@@ -29,6 +29,7 @@ void init_options(options * o){
     o->supress = 0;
     o->verb = 2;
     o->error = "None";
+    o->gcc_command = "ERROR";
 }
 
 
@@ -80,7 +81,7 @@ options argv_decode(int argc, void * argv[]){
                     cur_arg++; //Check for the option they entered
                     ret.supress += (argv_s[cur_arg][0] == 'c');
                     ret.supress += (argv_s[cur_arg][0] == 'g');
-                    if((argv_s[cur_arg][0] == 'c') + (argv_s[cur_arg][0] == 'g')){ //Check for errors
+                    if((argv_s[cur_arg][0] != 'c') && (argv_s[cur_arg][0] != 'g')){ //Check for errors
                         ret.error = malloc(strlen(useage_errors[3]) + 1);
                         memcpy(ret.error, useage_errors[3], strlen(useage_errors[3]) + 1);
                         return ret; //Return the function with the error
@@ -90,7 +91,7 @@ options argv_decode(int argc, void * argv[]){
             }//END OF SWITCH
         }//END OF OPTION CHECK
 
-        if(argv_s[cur_arg][0] != 'g' && argv_s[cur_arg][1]!='c'){ //Check if we are begining the GCC command
+        if(argv_s[cur_arg][0] == 'g' && argv_s[cur_arg][1] =='c'){ //Check if we are begining the GCC command
             break;
         }else if(argv_s[cur_arg][0] == 'M' || argv_s[cur_arg][0] == 'm'){ //Check if we are accepting a makefile
             if(argv_s[cur_arg][1] == 'a'){
