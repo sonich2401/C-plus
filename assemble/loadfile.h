@@ -14,9 +14,7 @@ typedef struct {
 
 rFile loadTextFile(string file_path);
 
-string loadTextLineFile(string file_path){
-
-}
+string loadTextLineFile(string file_path);
 
 
 

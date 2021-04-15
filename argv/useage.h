@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "typedefs.h"
+#include "../typedefs.h"
 
 #ifndef DATE //To make VS Code happy (No effect on code output)
     #define DATE "NULL"

@@ -91,3 +91,10 @@ void appendFileLine(rFile * file, uint32 line, string new_line){
   checkFileBufferHeath(file); //Make sure we have enough memory
   setFileLine(file, file->linec, new_line);
 }
+
+
+
+string loadTextLineFile(string file_path){
+  string ret;
+  return ret;
+}

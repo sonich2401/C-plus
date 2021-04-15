@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include "typedefs.h"
-#include "cppstdlib/stoi/stoi.h"
-#include "cppstdlib/rfind/rfind.h"
+#include "argv.h"
 
 const string useage_errors[] = {
     "No arguments!",
@@ -13,18 +9,6 @@ const string useage_errors[] = {
     "Help"
 };
 
-typedef struct {
-    string gcc_command;
-    bool auto_make;
-    bool delete_c;
-    bool use_make;
-    int supress; // 0 = none, 1 = gcc, 2 = c+
-    int verb; // 0 = disabled
-    uint16 file_count;
-    string * files;
-    string error;
-}options;
-
 void init_options(options * o){
     o->auto_make = false;
     o->delete_c =  true;
@@ -34,7 +18,6 @@ void init_options(options * o){
     o->error = "None";
     o->gcc_command = "ERROR";
 }
-
 
 options argv_decode(int argc, void * argv[]){
     string * argv_s = (string *)argv;

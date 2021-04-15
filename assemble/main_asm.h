@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../typedefs.h"
+#include "../argv/argv.h"
 #include "loadfile.h"
 
-void assemble(string file_path);
+void assemble(options * file_path);
 

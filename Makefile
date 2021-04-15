@@ -1,10 +1,10 @@
 DATE :=
 CC := gcc
 
-SOURCES := assemble, cppstdlib/rfind
+SOURCES := assemble cppstdlib/rfind cppstdlib/vector argv
 INCLUDE := $(SOURCES)
 
-C_FILES := $(wildcard $(SOURCES)/*.c) $(wildcard *.c)
+C_FILES := $(foreach dir,$(SOURCES),  $(wildcard $(dir)/*.c) ) $(wildcard *.c)
 H_FILES := $(wildcard $(SOURCES)/*.h) $(wildcard *.h)
 
 BUILD := c+
