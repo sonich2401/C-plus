@@ -2,6 +2,6 @@
 #include "main_asm.h"
 
 
-string ** assemble(string * file_path){
-
+rFile * assemble(string * file_path){
+    rFile current_file;
 }

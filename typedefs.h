@@ -25,7 +25,7 @@ typedef float float32;
 
 #define bool char
 #define false 0
-#define true 0
+#define true 1
 #define True true
 #define False false
 #define TRUE true
