@@ -13,6 +13,10 @@ typedef struct{
     uint32 end;
 } function;
 
+function * create_function(){
+
+}
+
 void deconstruct_function(function * o){
     free(o->name);
     vector_deconstruct(&o->code);
@@ -50,16 +54,21 @@ class_struct * create_struct(rFile * file, uint32 line_start){
     vector_init(&ret->functions, sizeof(string), NULL);
 
     string * rStruct = &file->dat[line_start]; //Move the cursor to the correct line of the file
-    uint16 struct_name_pos =  rfind(rStruct[0], "struct",0);
-    struct_name_pos =rfind(rStruct[0], " ",0);
+    uint16 struct_name_pos = rfind(rStruct[0], "struct",0);
+    struct_name_pos = rfind(rStruct[0], " ",0);
     uint16 last_pos = struct_name_pos;
 
 
     int32 name_end_pos = rfind(rStruct[0], "{",0);
     if(name_end_pos == -1){
-        ret->name = substr(rStruct[0], last_pos, strlen(rStruct[0]));
+        ret->name = substr(rStruct[0], last_pos+1, strlen(rStruct[0]));
     }else{
-        ret->name = substr(rStruct[0], last_pos, name_end_pos);
+        ret->name = substr(rStruct[0], last_pos+1, name_end_pos - 1);
+    }
+
+    //Create Struct defines
+    for(uint16 struct_line = 1; false ; struct_line++){ //GET RID OF FALSE TO MAKE THE LOOP WORK
+
     }
 
     return ret;
@@ -86,12 +95,10 @@ void assemble(options * file_list){
 
     source_defines ** defines = malloc(file_list->file_count * sizeof(source_defines));
     
-
     for(uint16 file_index = 0; file_index < file_list->file_count; file_index++){
         defines[file_index] = malloc(sizeof(source_defines));
         source_defines_init(defines[file_index]);
         
-        //files[file_index] = malloc(sizeof(rFile));
         files[file_index] = loadTextFile(file_list->files[file_index]); //Load the file
        
         for(uint32 line_pos = 0; line_pos < files[file_index]->linec; line_pos++ ){
@@ -106,7 +113,7 @@ void assemble(options * file_list){
     }
 
     for(uint16 i =0; i < vector_size(defines[0]->structs); i++){
-        printf("DEFINE: %s\n", ((class_struct*)vector_index(defines[0]->structs, i))->name  );
+        printf("DEFINE:%s:\n", ((class_struct*)vector_index(defines[0]->structs, i))->name  );
     }
 
     //Cleanup

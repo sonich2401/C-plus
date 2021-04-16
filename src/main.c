@@ -15,9 +15,9 @@ int main(int argc, void * argv[]){
     bool returncode = displayUsage(main_options.error); //If error is the default value this function will do nothing
 
     if(!returncode){ //If there was no errors then
-
+        printf("Assembling ...\n");
         for(uint8 i = 0; i < main_options.file_count; i++){
-            printf("%s\n", main_options.files[i]);
+            printf("\t%s\n", main_options.files[i]);
         }
 
         assemble(&main_options);

@@ -7,4 +7,5 @@
     #define rfind_FAIL -1
 #endif
 
+//Find the index of a word in a string given the keyword that your looking for
 int32 rfind(string src, string find, uint32 offset);

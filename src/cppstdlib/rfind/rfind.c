@@ -1,4 +1,6 @@
 #include "rfind.h"
+
+/*
 int32 rfind(string src, string find, uint32 offset)
 {
     uint32 src_len = strlen(src);
@@ -22,4 +24,13 @@ int32 rfind(string src, string find, uint32 offset)
         }
     }
     return -1; //Default
+}*/
+
+
+int32 rfind(string src, string filter, uint32 offset){
+    string ret = strstr((src + offset), filter);
+    if(ret == NULL){
+        return rfind_FAIL;
+    }
+    return ret  - src;
 }
