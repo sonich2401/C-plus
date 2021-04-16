@@ -55,7 +55,7 @@ class_struct * create_struct(rFile * file, uint32 line_start){
     uint16 last_pos = struct_name_pos;
 
 
-    uint16 name_end_pos = rfind(rStruct[0], "{",0);
+    int32 name_end_pos = rfind(rStruct[0], "{",0);
     if(name_end_pos == -1){
         ret->name = substr(rStruct[0], last_pos, strlen(rStruct[0]));
     }else{

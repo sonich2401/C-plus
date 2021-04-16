@@ -2,6 +2,7 @@
 
 #include "argv/useage.h"
 #include "argv/argv.h"
+#include "util/replace/replace.h"
 
 #include "assemble/main_asm.h"
 
