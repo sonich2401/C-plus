@@ -9,7 +9,8 @@ else
 	CC := $(VS_PATH)/cl.exe
 endif
 
-SOURCES := assemble cppstdlib/rfind cppstdlib/vector cppstdlib/substr argv
+ROOT_DIRECTORY=.
+SOURCES := ${shell find ${ROOT_DIRECTORY} -type d -print}
 INCLUDE := $(SOURCES)
 
 C_FILES := $(foreach dir,$(SOURCES),  $(wildcard $(dir)/*.c) ) $(wildcard *.c)
