@@ -19,6 +19,8 @@ int main(int argc, void * argv[]){
             printf("%s\n", main_options.files[i]);
         }
 
+        assemble(&main_options);
+
         if(main_options.use_make = false){ //Make sure we dont leak memory
             free(main_options.gcc_command);
         }

@@ -12,7 +12,7 @@ typedef struct {
 }rFile;
 
 
-rFile loadTextFile(string file_path);
+rFile * loadTextFile(string file_path);
 
 string loadTextLineFile(string file_path);
 

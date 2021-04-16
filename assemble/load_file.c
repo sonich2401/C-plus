@@ -7,12 +7,12 @@
 
 
 
-rFile loadTextFile(string file_path){
-
-    rFile rret;
-    rret.fn = malloc(strlen(file_path)+1);
-    strcpy(rret.fn, file_path);
-
+rFile * loadTextFile(string file_path){
+  
+    rFile * rret;
+    rret = malloc(sizeof(rFile));
+    rret->fn = malloc(strlen(file_path)+1);
+    strcpy(rret->fn, file_path);
 
     string * ret;
     unsigned long max_line = LOAD_FILE_MAX_LINES;
@@ -37,9 +37,9 @@ rFile loadTextFile(string file_path){
       }
       fclose ( file );
    }
-  rret.buff_size = max_line;
-  rret.linec = cur_line;
-  rret.dat = ret;
+  rret->buff_size = max_line;
+  rret->linec = cur_line;
+  rret->dat = ret;
   rret;
 }
 

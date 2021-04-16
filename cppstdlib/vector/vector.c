@@ -1,6 +1,17 @@
 #include "vector.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
+
+void vector_init(vector * vec, uint16 type_size, void (*child_deconstruct)(void *)){
+    vec->type_size = type_size;
+    vec->total_data = 0;
+    vec->child_deconstruct = child_deconstruct;
+
+    vec->buffer_health = 30;
+    vec->dat = malloc(vec->buffer_health * vec->type_size); //Reserve 30 slots for the vector
+}
+
 
 //Allocate a new vector and return the pointer to the new vector
 vector * vector_create(uint16 type_size, void (*child_deconstruct)(void *)){
@@ -20,7 +31,8 @@ vector * vector_create(uint16 type_size, void (*child_deconstruct)(void *)){
 
 //Checks if the buffer needs to be expanded
 void vector_add_check(vector * vec){
-    if(vec->buffer_health >= vec->total_data+1){
+    if(vec->buffer_health <= vec->total_data+1){
+        printf("BANANA2\n");
         vec->buffer_health += 20;
         vec->dat = realloc(vec->dat,  vec->buffer_health * vec->type_size);
     }
@@ -28,9 +40,12 @@ void vector_add_check(vector * vec){
 
 //Push a block of data to the end of the vector
 void vector_push_back(vector * vec, void * data){
-    vector_add_check(vec); //Make sure we have enough memory
-    void * cursor = (void*)(vec->dat + vec->total_data++ * vec->type_size);
-    memcpy(cursor, data , vec->type_size) ;
+   vector_add_check(vec); //Make sure we have enough memory
+
+   for(uint16 i = 0; i < vec->type_size; i++){
+    ((char*)vec->dat)[vec->total_data * vec->type_size + i] = *(char *)(data + i);
+   }
+   vec->total_data++;
 }
 
 //Get the size of the vector
@@ -40,9 +55,7 @@ uint64 vector_size(vector * vec){
 
 //Get the value stored at the index in the vector
 void * vector_index(vector * vec, uint64 index){
-    void * ret;
-    memcpy(ret, vec->dat + (index * vec->type_size), vec->type_size);
-    return ret;
+    return vec->dat + (index * vec->type_size);
 }
 
 //Cleans up self and children
@@ -57,5 +70,5 @@ void vector_deconstruct(vector * vec){
         }
     }
     free(vec->dat);
-    free(vec);
+    //free(vec);
 }
