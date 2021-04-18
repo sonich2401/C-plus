@@ -26,14 +26,13 @@ rFile * loadTextFile(string file_path){
 
       while ( fgets ( line, sizeof(line), file ) != NULL)
       {
-        if(feof(file)){break;}//Check if end of file
-
         if(cur_line+1 >= max_line){
           max_line += 50;
           ret = realloc(ret, max_line * sizeof(string)); 
         }
         ret[cur_line] = malloc(strlen(line)+1);
         strcpy(ret[cur_line++],line);
+        if(feof(file)){break;}//Check if end of file
       }
       fclose ( file );
    }
