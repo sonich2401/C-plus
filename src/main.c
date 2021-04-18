@@ -24,7 +24,7 @@ int main(int argc, void * argv[]){
 
         if(main_options.use_make == false){ //Make sure we dont leak memory
           printf("HERE\n");
-            free(main_options.gcc_command);
+            //free(main_options.gcc_command);
             printf("HERE\n");
         }
         for(uint16 i = 0; i < main_options.file_count; i++){

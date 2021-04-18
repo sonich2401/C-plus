@@ -34,3 +34,24 @@ int32 rfind(string src, string filter, uint32 offset){
     }
     return ret  - src;
 }
+
+int32 rfind_l(string src, string filter, uint32 offset){
+    string ret = strstr((src + offset), filter);
+
+    uint32 srclen = strlen(src + offset);
+    int32 last_index_found = rfind_FAIL;
+
+    if(strstr((src + offset), filter) == NULL){ //Return if there is no match
+      return rfind_FAIL;
+    }
+
+    for(uint32 i = 0; i < srclen; i++){
+      string ret = strstr((src + offset), filter);
+      if(ret == NULL){ //Return if there is no match
+        return last_index_found;
+      }
+      last_index_found = ret - src;
+    }
+
+    return last_index_found;
+}
