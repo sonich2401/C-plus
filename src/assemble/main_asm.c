@@ -3,6 +3,7 @@
 #include "loadfile.h"
 #include "../cppstdlib/substr/substr.h"
 #include "../cppstdlib/vector/vector.h"
+#include "scope.h"
 
 typedef struct{
     string name;
@@ -67,10 +68,10 @@ class_struct * create_struct(rFile * file, uint32 line_start){
     }
 
     //Create Struct defines
-    for(uint16 struct_line = 1; false ; struct_line++){ //GET RID OF FALSE TO MAKE THE LOOP WORK
-
-    }
-
+    function_scope * tmp = function_scope_create(rStruct);
+    ret->defines = tmp->defines;
+    ret->functions = tmp->scopes;
+    free(tmp);
     return ret;
 }
 
@@ -115,6 +116,19 @@ void assemble(options * file_list){
     for(uint16 i =0; i < vector_size(defines[0]->structs); i++){
         printf("DEFINE:%s:\n", ((class_struct*)vector_index(defines[0]->structs, i))->name  );
     }
+
+
+  for(uint64 i = 0; i < vector_size(defines[0]->structs);i++){
+    for(uint64 i1=0; i1 < defines[0]->structs[i].total_data; i1++){
+      source_defines * tmp1 = defines[0]; 
+      vector * tmp2 = tmp1->structs;
+      class_struct * tmp3 = (class_struct*)&tmp2->dat[i];
+      printf("DE: %s\n", ((var_def*)tmp3->defines.dat)[i1].name );
+    }
+  }
+
+
+
 
     //Cleanup
     for(uint16 file_index = 0; file_index < file_list->file_count; file_index++){

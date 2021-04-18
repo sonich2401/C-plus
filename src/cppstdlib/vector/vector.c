@@ -72,3 +72,7 @@ void vector_deconstruct(vector * vec){
     free(vec->dat);
     //free(vec);
 }
+
+void * vector_back(vector * vec){
+  return &vec->dat[(vec->total_data-1) * vec->type_size];
+}

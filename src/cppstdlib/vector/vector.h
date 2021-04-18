@@ -1,3 +1,4 @@
+#pragma once
 #include "../../typedefs.h"
 #include <stdlib.h>
 
@@ -28,3 +29,14 @@ uint64 vector_size(vector * vec);
 
 //Cleans up self and children
 void vector_deconstruct(vector * vec);
+
+//Get last element in list
+void * vector_back(vector * vec);
+
+#ifndef vector_uncast
+  #define vector_uncast(vec, type) ((type*)vec.dat)
+#endif
+
+#ifndef vector_uindex
+  #define vector_uindex(vec, type, i) (vector_uncast(vec,type)[i])
+#endif

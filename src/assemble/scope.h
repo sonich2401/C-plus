@@ -1,3 +1,9 @@
+#pragma once
+
+#ifndef SCOPE_H
+#define SCOPE_H
+
+
 #include "../typedefs.h"
 #include "../cppstdlib/vector/vector.h"
 #include "loadfile.h"
@@ -24,3 +30,5 @@ typedef struct{
 function_scope * function_scope_create(string * function_start);
 
 void fill_function_scope(function_scope * o, string * function_start);
+
+#endif
