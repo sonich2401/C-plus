@@ -18,7 +18,6 @@ H_FILES := $(wildcard $(SOURCES)/*.h) $(wildcard *.h)
 
 BUILD := c+
 
-
 ifeq ($(UNAME), Linux)
 	DATE := -DDATE="\"`date`\""
 	CMD := $(CC) -o $(BUILD) $(DATE) $(C_FILES)
@@ -30,4 +29,3 @@ endif
 
 all:
 	@$(CC) -o $(BUILD) -Wno-incompatible-pointer-types $(DATE) $(C_FILES)
-		

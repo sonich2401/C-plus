@@ -32,7 +32,6 @@ options argv_decode(int argc, void * argv[]){
     }
 
     if(argv_s[1][0] == '-' && argv_s[1][1] == 'h'){ //Display the help message
-    printf("Here\n");
         ret.error = malloc(strlen(useage_errors[5]) + 1);
         memcpy(ret.error, useage_errors[5], strlen(useage_errors[5]) + 1);
         return ret;

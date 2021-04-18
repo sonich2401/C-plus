@@ -22,17 +22,18 @@ int main(int argc, void * argv[]){
 
         assemble(&main_options);
 
-        if(main_options.use_make = false){ //Make sure we dont leak memory
+        if(main_options.use_make == false){ //Make sure we dont leak memory
+          printf("HERE\n");
             free(main_options.gcc_command);
+            printf("HERE\n");
         }
+        for(uint16 i = 0; i < main_options.file_count; i++){
+          free(main_options.files[i]);
+        }
+        free(main_options.files);
     }
 
-    //Cleanup
-
-    for(uint16 i = 0; i < main_options.file_count; i++){
-        free(main_options.files[i]);
-    }
-    free(main_options.files);
+    //Cleanu
 
     printf("END OF LINE ...\n");
     return 0;
